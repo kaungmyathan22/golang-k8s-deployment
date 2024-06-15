@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-ping
+spec:
+  replicas: 3 # Number of pods to run at any given time
+  selector:
+    matchLabels:
+      app: go-ping # This deployment applies to any Pods matching the specified label
+  template: # This deployment will create a set of pods using the configurations in this template
+    metadata:
+      labels:
+        app: go-ping
+    spec:
+      containers:
+        - name: go-ping
+          image: kaungmyathan/go-ping:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
